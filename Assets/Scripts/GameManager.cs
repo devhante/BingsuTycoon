@@ -46,7 +46,11 @@ namespace BingsuTycoon
                     throw new NullReferenceException();
                 }
 
-                speechBubble.Print("이곳은 어디죠? 이상한 구멍에 빨려\n들어갔더니 여기로 왔어요...!\n너무 더워요! 달콤한 간얼음을 주세요!");
+                speechBubble.Print(new string[] {
+                    "이곳은 어디죠? 이상한 구멍에 빨려\n들어갔더니 여기로 왔어요...!\n너무 더워요! 달콤한 간얼음을 주세요!",
+                    "너무 더워요! 달콤한 간얼음을 주세요!",
+                    "너무 더워요! 달콤한 간얼음을 주세요!"
+                });
             }
             catch (NullReferenceException)
             {
