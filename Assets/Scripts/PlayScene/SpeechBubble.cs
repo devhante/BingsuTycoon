@@ -78,7 +78,8 @@ namespace BingsuTycoon.PlayScene
         private void OnClickSubmitButton()
         {
             SetOptionsActive(false);
-            Debug.Log("빙수 제작 페이지로 이동");
+            GameObject.FindGameObjectWithTag("MakeScreen").GetComponent<MakeScreen>().Appear();
+            gameObject.SetActive(false);
         }
 
         private void OnClickHintButton()

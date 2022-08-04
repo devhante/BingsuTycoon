@@ -33,31 +33,8 @@ namespace BingsuTycoon
 
         private void Start()
         {
-            TestSpeechBubble();
+            GameObject.FindGameObjectWithTag("CustomerSpawner").GetComponent<CustomerSpawner>().SpawnRandomCustomer();
         }
-
-        private void TestSpeechBubble()
-        {
-            try
-            {
-                SpeechBubble speechBubble = GameObject.FindGameObjectWithTag("SpeechBubble").GetComponent<SpeechBubble>();
-                if (speechBubble == null)
-                {
-                    throw new NullReferenceException();
-                }
-
-                speechBubble.Print(new string[] {
-                    "이곳은 어디죠? 이상한 구멍에 빨려\n들어갔더니 여기로 왔어요...!\n너무 더워요! 달콤한 간얼음을 주세요!",
-                    "너무 더워요! 달콤한 간얼음을 주세요!",
-                    "너무 더워요! 달콤한 간얼음을 주세요!"
-                });
-            }
-            catch (NullReferenceException)
-            {
-                Debug.LogError("말풍선 객체가 없어 대사 출력에 실패했습니다.");
-            }
-        }
-
     }
 
 }
