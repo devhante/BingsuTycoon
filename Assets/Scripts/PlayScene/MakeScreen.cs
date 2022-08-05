@@ -15,8 +15,10 @@ namespace BingsuTycoon.PlayScene
         private Transform leftPos;
         private Transform rightPos;
 
-        private Vector3 prevTouchPos;
-        private Vector3 curTouchPos;
+        private Vector3 prevMousePos;
+        private Vector3 curMousePos;
+
+        private Vector3 offset;
 
         private void Awake()
         {
@@ -28,40 +30,26 @@ namespace BingsuTycoon.PlayScene
         {
             if (!EventSystem.current.IsPointerOverGameObject())
             {
-                prevTouchPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                prevMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 StartCoroutine(DragCoroutine());
             }
         }
 
         private IEnumerator DragCoroutine()
         {
-            while(Input.GetMouseButton(0))
+            while (Input.GetMouseButton(0))
             {
                 if (!EventSystem.current.IsPointerOverGameObject())
                 {
-                    curTouchPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                    float diff = curTouchPos.x - prevTouchPos.x;
-
-                    if (diff > 0f)
+                    curMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    Vector3 leftViewPos = Camera.main.WorldToViewportPoint(leftPos.position);
+                    Vector3 rightViewPos = Camera.main.WorldToViewportPoint(rightPos.position);
+                    if ((curMousePos.x > prevMousePos.x && leftViewPos.x < 0) || (curMousePos.x < prevMousePos.x && rightViewPos.x > 1))
                     {
-                        Vector3 pos = Camera.main.WorldToViewportPoint(leftPos.position);
-                        if (pos.x + diff > 0f)
-                        {
-                            diff = 0f - pos.x;
-                        }
+                        float resultPositionX = transform.position.x + curMousePos.x - prevMousePos.x;
+                        transform.position = new Vector3(resultPositionX, transform.position.y, transform.position.z);
                     }
-                    else if (diff < 0f)
-                    {
-                        Vector3 pos = Camera.main.WorldToViewportPoint(rightPos.position);
-                        if (pos.x + diff < 1f)
-                        {
-                            diff = 1 - pos.x;
-                        }
-                    }
-
-                    float resultPosX = transform.position.x + diff;
-                    transform.position = new Vector3(resultPosX, transform.position.y, transform.position.z);
-                    prevTouchPos = curTouchPos;
+                    prevMousePos = curMousePos;
                     yield return null;
                 }
             }
