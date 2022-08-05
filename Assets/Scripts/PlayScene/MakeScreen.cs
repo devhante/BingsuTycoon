@@ -9,8 +9,8 @@ namespace BingsuTycoon.PlayScene
 {
     public class MakeScreen : MonoBehaviour
     {
-        private Vector3 appearPos = new Vector3(4, 0, 0);
-        private Vector3 disappearPos = new Vector3(20, 0, 0);
+        private Vector3 appearPos = new Vector3(2, 0, 0);
+        private Vector3 disappearPos = new Vector3(30, 0, 0);
 
         private Transform leftPos;
         private Transform rightPos;
@@ -45,7 +45,6 @@ namespace BingsuTycoon.PlayScene
                     if (diff > 0f)
                     {
                         Vector3 pos = Camera.main.WorldToViewportPoint(leftPos.position);
-                        Debug.Log("leftPos = " + pos);
                         if (pos.x + diff > 0f)
                         {
                             diff = 0f - pos.x;
@@ -54,7 +53,6 @@ namespace BingsuTycoon.PlayScene
                     else if (diff < 0f)
                     {
                         Vector3 pos = Camera.main.WorldToViewportPoint(rightPos.position);
-                        Debug.Log("rightPos = " + pos);
                         if (pos.x + diff < 1f)
                         {
                             diff = 1 - pos.x;
