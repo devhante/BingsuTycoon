@@ -17,6 +17,7 @@ namespace BingsuTycoon.PlayScene
 
         private void OnClickButton()
         {
+            GameObject.FindGameObjectWithTag("CounterBingsu").GetComponent<CounterBingsu>().Appear();
             GameObject.FindGameObjectWithTag("MakeScreen").GetComponent<MakeScreen>().Disappear();
         }
     }

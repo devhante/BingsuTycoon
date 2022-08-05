@@ -6,6 +6,8 @@ TagManager:
   tags:
   - CustomerSpawner
   - MakeScreen
+  - SpeechBubble
+  - CounterBingsu
   layers:
   - Default
   - TransparentFX
