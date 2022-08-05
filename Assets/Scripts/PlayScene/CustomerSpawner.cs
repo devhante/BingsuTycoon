@@ -8,6 +8,8 @@ namespace BingsuTycoon.PlayScene
     {
         public GameObject[] customerPrefabs;
 
+        private int index = -1;
+
         private void Awake()
         {
             InstantiateCustomers();
@@ -17,14 +19,28 @@ namespace BingsuTycoon.PlayScene
         {
             foreach (var item in customerPrefabs)
             {
-                Debug.Log(item.name);
                 Instantiate(item, transform);
             }
         }
 
-        public void SpawnRandomCustomer()
+        public void SpawnRandomCustomer(float idle)
         {
-            transform.GetChild(Random.Range(0, transform.childCount)).gameObject.SetActive(true);
+            StartCoroutine(SpawnRandomCustomerCoroutine(idle));
+        }
+
+        private IEnumerator SpawnRandomCustomerCoroutine(float idle)
+        {
+            int randomIndex;
+            yield return new WaitForSeconds(idle);
+
+            while (true)
+            {
+                randomIndex = Random.Range(0, transform.childCount);
+                if (randomIndex != index) break;
+            }
+
+            transform.GetChild(randomIndex).gameObject.SetActive(true);
+            index = randomIndex;
         }
     }
 }

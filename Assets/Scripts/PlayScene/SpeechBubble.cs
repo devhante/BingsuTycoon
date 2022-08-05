@@ -9,13 +9,17 @@ namespace BingsuTycoon.PlayScene
 {
     public class SpeechBubble : MonoBehaviour
     {
+        public enum SpeechType { Order, Receive }
+
         private Button buttonComponent;
         private TMP_Text textComponent;
 
-        private Button submitButtonComponent;
+        private Button submitOrderButtonComponent;
         private Button hintButtonComponent;
+        private Button submitReceiveButtonComponent;
 
         private float printInterval = 0.05f;
+        private SpeechType speechType;
         private string[] contents;
         private int contentIndex = 0;
         private Coroutine printCoroutine;
@@ -24,24 +28,36 @@ namespace BingsuTycoon.PlayScene
         {
             buttonComponent = GetComponent<Button>();
             textComponent = transform.Find("Text").GetComponent<TMP_Text>();
-            submitButtonComponent = transform.Find("SubmitButton").GetComponent<Button>();
+            submitOrderButtonComponent = transform.Find("SubmitOrderButton").GetComponent<Button>();
             hintButtonComponent = transform.Find("HintButton").GetComponent<Button>();
+            submitReceiveButtonComponent = transform.Find("SubmitReceiveButton").GetComponent<Button>();
 
             buttonComponent.onClick.AddListener(OnClickButton);
-            submitButtonComponent.onClick.AddListener(OnClickSubmitButton);
+            submitOrderButtonComponent.onClick.AddListener(OnClickSubmitOrderButton);
             hintButtonComponent.onClick.AddListener(OnClickHintButton);
+            submitReceiveButtonComponent.onClick.AddListener(OnClickSubmitReceiveButton);
 
-            SetOptionsActive(false);
+            SetOptionsActive(SpeechType.Order, false);
+            SetOptionsActive(SpeechType.Receive, false);
         }
 
-        private void SetOptionsActive(bool value)
+        private void SetOptionsActive(SpeechType speechType, bool value)
         {
-            submitButtonComponent.gameObject.SetActive(value);
-            hintButtonComponent.gameObject.SetActive(value && contents.Length > contentIndex + 1);
+            switch (speechType)
+            {
+                case SpeechType.Order:
+                    submitOrderButtonComponent.gameObject.SetActive(value);
+                    hintButtonComponent.gameObject.SetActive(value && contents.Length > contentIndex + 1);
+                    break;
+                case SpeechType.Receive:
+                    submitReceiveButtonComponent.gameObject.SetActive(value);
+                    break;
+            }
         }
 
-        public void Print(string[] contents)
+        public void Print(SpeechType speechType, string[] contents)
         {
+            this.speechType = speechType;
             this.contents = contents;
             contentIndex = 0;
 
@@ -60,7 +76,7 @@ namespace BingsuTycoon.PlayScene
                 yield return new WaitForSeconds(printInterval);
             }
 
-            SetOptionsActive(true);
+            SetOptionsActive(speechType, true);
         }
 
         private void OnClickButton()
@@ -72,21 +88,28 @@ namespace BingsuTycoon.PlayScene
         {
             StopCoroutine(printCoroutine);
             textComponent.text = contents[contentIndex];
-            SetOptionsActive(true);
+            SetOptionsActive(speechType, true);
         }
 
-        private void OnClickSubmitButton()
+        private void OnClickSubmitOrderButton()
         {
-            SetOptionsActive(false);
+            SetOptionsActive(speechType, false);
             GameObject.FindGameObjectWithTag("MakeScreen").GetComponent<MakeScreen>().Appear();
             gameObject.SetActive(false);
         }
 
         private void OnClickHintButton()
         {
-            SetOptionsActive(false);
+            SetOptionsActive(speechType, false);
             contentIndex++;
             printCoroutine = StartCoroutine(PrintCoroutine());
+        }
+
+        private void OnClickSubmitReceiveButton()
+        {
+            SetOptionsActive(speechType, false);
+            GameObject.FindGameObjectWithTag("Customer").GetComponent<Customer>().Disappear();
+            gameObject.SetActive(false);
         }
     }
 }

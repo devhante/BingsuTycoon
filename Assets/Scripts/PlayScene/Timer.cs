@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    Slider sliderComponent;
+    private Slider sliderComponent;
+    private GameOverPanel gameOverPanel;
 
     private float currentTime = 0f;
     private float timeLimit = 120f;
@@ -13,6 +14,7 @@ public class Timer : MonoBehaviour
     private void Awake()
     {
         sliderComponent = GetComponent<Slider>();
+        gameOverPanel = GameObject.FindGameObjectWithTag("GameOverPanel").GetComponent<GameOverPanel>();
     }
 
     private void Start()
@@ -35,5 +37,9 @@ public class Timer : MonoBehaviour
             sliderComponent.value = currentTime / timeLimit;
             yield return null;
         }
+
+        Time.timeScale = 0;
+        gameOverPanel.gameObject.SetActive(true);
+        gameOverPanel.PrintResult();
     }
 }

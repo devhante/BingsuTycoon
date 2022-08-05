@@ -11,6 +11,8 @@ namespace BingsuTycoon.Common
     {
         private static GameManager instance = null;
 
+        public int BingsuCount { get; set; } = 0;
+
         public static GameManager Instance
         {
             get
@@ -28,12 +30,13 @@ namespace BingsuTycoon.Common
             }
 
             instance = this;
-            DontDestroyOnLoad(this.gameObject);
+            
+            // DontDestroyOnLoad(this.gameObject);
         }
 
         private void Start()
         {
-            GameObject.FindGameObjectWithTag("CustomerSpawner").GetComponent<CustomerSpawner>().SpawnRandomCustomer();
+            GameObject.FindGameObjectWithTag("CustomerSpawner").GetComponent<CustomerSpawner>().SpawnRandomCustomer(1);
         }
     }
 

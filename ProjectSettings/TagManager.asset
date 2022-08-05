@@ -8,6 +8,9 @@ TagManager:
   - MakeScreen
   - SpeechBubble
   - CounterBingsu
+  - Customer
+  - PausePanel
+  - GameOverPanel
   layers:
   - Default
   - TransparentFX
