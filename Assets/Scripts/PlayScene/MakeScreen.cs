@@ -9,13 +9,20 @@ namespace BingsuTycoon.PlayScene
 {
     public class MakeScreen : MonoBehaviour
     {
-        private Vector3 appearPos = new Vector3(0, 0, 0);
+        private Vector3 appearPos = new Vector3(4, 0, 0);
         private Vector3 disappearPos = new Vector3(20, 0, 0);
 
-        // TEST CODE START
+        private Transform leftPos;
+        private Transform rightPos;
 
         private Vector3 prevTouchPos;
         private Vector3 curTouchPos;
+
+        private void Awake()
+        {
+            leftPos = transform.Find("LeftPos").transform;
+            rightPos = transform.Find("RightPos").transform;
+        }
 
         private void OnMouseDown()
         {
@@ -33,16 +40,34 @@ namespace BingsuTycoon.PlayScene
                 if (!EventSystem.current.IsPointerOverGameObject())
                 {
                     curTouchPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                    float resultPosX = transform.position.x + curTouchPos.x - prevTouchPos.x;
-                    resultPosX = Mathf.Clamp(resultPosX, -8.34f, 1.67f);
+                    float diff = curTouchPos.x - prevTouchPos.x;
+
+                    if (diff > 0f)
+                    {
+                        Vector3 pos = Camera.main.WorldToViewportPoint(leftPos.position);
+                        Debug.Log("leftPos = " + pos);
+                        if (pos.x + diff > 0f)
+                        {
+                            diff = 0f - pos.x;
+                        }
+                    }
+                    else if (diff < 0f)
+                    {
+                        Vector3 pos = Camera.main.WorldToViewportPoint(rightPos.position);
+                        Debug.Log("rightPos = " + pos);
+                        if (pos.x + diff < 1f)
+                        {
+                            diff = 1 - pos.x;
+                        }
+                    }
+
+                    float resultPosX = transform.position.x + diff;
                     transform.position = new Vector3(resultPosX, transform.position.y, transform.position.z);
                     prevTouchPos = curTouchPos;
                     yield return null;
                 }
             }
         }
-
-        // TEST CODE END
 
         public void Appear()
         {
