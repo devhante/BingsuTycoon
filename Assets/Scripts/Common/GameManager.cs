@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace BingsuTycoon
+namespace BingsuTycoon.Common
 {
     public class GameManager : MonoBehaviour
     {

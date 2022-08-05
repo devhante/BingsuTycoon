@@ -1,4 +1,4 @@
-using BingsuTycoon;
+using BingsuTycoon.Common;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

@@ -57,7 +57,7 @@
 
 using UnityEngine;
 
-namespace BingsuTycoon
+namespace BingsuTycoon.Common
 {
     public static class EasingFunction
     {
