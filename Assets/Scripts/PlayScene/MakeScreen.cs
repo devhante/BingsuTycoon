@@ -28,7 +28,6 @@ namespace BingsuTycoon.PlayScene
 
         private void OnMouseDown()
         {
-            Debug.Log("MakeScreen OnMouseDown");
             if (!EventSystem.current.IsPointerOverGameObject())
             {
                 prevMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);

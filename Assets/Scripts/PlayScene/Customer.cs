@@ -15,7 +15,7 @@ namespace BingsuTycoon.PlayScene
         private void Awake()
         {
             srComponent = transform.Find("Sprite").GetComponent<SpriteRenderer>();
-            speechBubble = transform.Find("Canvas").Find("SpeechBubble").GetComponent<SpeechBubble>();
+            speechBubble = transform.Find("CustomerCanvas").Find("SpeechBubble").GetComponent<SpeechBubble>();
 
             gameObject.SetActive(false);
         }

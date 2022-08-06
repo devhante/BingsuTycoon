@@ -17,7 +17,6 @@ public class Bowl : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Debug.Log("Bowl OnMouseDown");
         if (!EventSystem.current.IsPointerOverGameObject())
         {
             startMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
