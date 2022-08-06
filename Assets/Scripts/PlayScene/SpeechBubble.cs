@@ -4,6 +4,7 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using BingsuTycoon.Common;
 
 namespace BingsuTycoon.PlayScene
 {
@@ -61,6 +62,7 @@ namespace BingsuTycoon.PlayScene
             this.contents = contents;
             contentIndex = 0;
 
+            GameManager.Instance.RevealedOrderList.Add(contents[contentIndex]);
             printCoroutine = StartCoroutine(PrintCoroutine());
         }
 

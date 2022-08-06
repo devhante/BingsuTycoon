@@ -131,6 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4c037b1b3e10924c9814653647bab50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  customerType: 1
 --- !u!61 &8730700317236812596
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -195,7 +196,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 6, y: 1.8}
+  m_AnchoredPosition: {x: 7, y: 0.3}
   m_SizeDelta: {x: 1000, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &6059980903530632888
@@ -217,7 +218,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_TargetDisplay: 0
 --- !u!114 &6059980903530632889
 MonoBehaviour:

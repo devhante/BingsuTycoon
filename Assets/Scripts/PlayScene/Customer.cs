@@ -7,6 +7,10 @@ namespace BingsuTycoon.PlayScene
 {
     public class Customer : MonoBehaviour
     {
+        public enum CustomerType { Mermaid, Cat, Elf }
+
+        public CustomerType customerType;
+
         private SpriteRenderer srComponent;
         private SpeechBubble speechBubble;
 
@@ -48,25 +52,29 @@ namespace BingsuTycoon.PlayScene
 
         private void Order()
         {
+            GameManager.Instance.SetRandomOrder(customerType);
+            string[] orderText = GameManager.Instance.CurrentOrder.OrderTextArray;
+
             speechBubble.gameObject.SetActive(true);
-            speechBubble.Print(SpeechBubble.SpeechType.Order, new string[] {
-                "이곳은 어디죠? 이상한 구멍에 빨려\n들어갔더니 여기로 왔어요...!\n너무 더워요! 달콤한 간얼음을 주세요!",
-                "너무 더워요! 달콤한 간얼음을 주세요!",
-                "너무 더워요! 달콤한 간얼음을 주세요!"
-            });
+            speechBubble.Print(SpeechBubble.SpeechType.Order, orderText);
         }
 
         public void Receive()
         {
             GameManager.Instance.BingsuCount++;
+
+            int wrongNumber = GameManager.Instance.CurrentOrder.OrderRecipe.GetWrongNumber(GameManager.Instance.CurrentIngredients);
+            int score = Mathf.Max(100 - (wrongNumber * 20), 0);
+
             speechBubble.gameObject.SetActive(true);
             speechBubble.Print(SpeechBubble.SpeechType.Receive, new string[] {
-                "와~ 맛있겠다!"
+                GameManager.Instance.GetRandomReceiveText(customerType, score)
             });
         }
 
         public void Disappear()
         {
+            GameManager.Instance.RevealedOrderList = new List<string>();
             StartCoroutine(DisappearCoroutine());
         }
 

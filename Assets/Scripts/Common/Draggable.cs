@@ -16,7 +16,7 @@ public class Draggable : MonoBehaviour
         }
     }
 
-    private IEnumerator DragCoroutine()
+    public IEnumerator DragCoroutine()
     {
         while (Input.GetMouseButton(0))
         {
@@ -24,8 +24,8 @@ public class Draggable : MonoBehaviour
             {
                 Vector3 resultPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;
                 transform.position = new Vector3(resultPosition.x, resultPosition.y, transform.position.z);
-                yield return null;
             }
+            yield return null;
         }
     }
 }

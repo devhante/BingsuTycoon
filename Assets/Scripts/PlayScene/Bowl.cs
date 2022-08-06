@@ -1,6 +1,6 @@
 using BingsuTycoon.Common;
+using BingsuTycoon.PlayScene.MakeIce;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -15,7 +15,21 @@ namespace BingsuTycoon.PlayScene
         private Vector3 targetLocalPos;
         private Coroutine moveCoroutine;
         private bool canMakeIce = false;
+        private GameObject makeBingsuPanel;
 
+        private void Awake()
+        {
+            makeBingsuPanel = GameObject.FindGameObjectWithTag("MakeIcePanel");
+        }
+
+        public void CreateBowlFromBowls(Vector3 startPos)
+        {
+            transform.position = startPos;
+            originPos = transform.position;
+            originLocalPos = transform.localPosition;
+            targetLocalPos = GameObject.FindGameObjectWithTag("IceMachine").transform.position - (originPos - originLocalPos); ;
+            moveCoroutine = StartCoroutine(MoveCoroutine());
+        }
 
         private void OnMouseDown()
         {
@@ -38,9 +52,9 @@ namespace BingsuTycoon.PlayScene
             if (!EventSystem.current.IsPointerOverGameObject())
             {
                 endMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                if (startMousePos == endMousePos)
+                if (canMakeIce && Mathf.Abs((startMousePos - endMousePos).magnitude) <= 0.1f)
                 {
-                    Debug.Log("TOUCH");
+                    makeBingsuPanel.SetActive(true);
                 }
                 else
                 {

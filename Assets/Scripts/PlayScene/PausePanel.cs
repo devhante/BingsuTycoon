@@ -10,14 +10,17 @@ namespace BingsuTycoon.PlayScene
     {
         private Button resumeButtonComponent;
         private Button restartButtonComponent;
+        private Button exitButtonComponent;
 
         private void Awake()
         {
             resumeButtonComponent = transform.Find("ResumeButton").GetComponent<Button>();
             restartButtonComponent = transform.Find("RestartButton").GetComponent<Button>();
+            exitButtonComponent = transform.Find("ExitButton").GetComponent<Button>();
 
             resumeButtonComponent.onClick.AddListener(OnClickResumeButton);
             restartButtonComponent.onClick.AddListener(OnClickRestartButton);
+            exitButtonComponent.onClick.AddListener(OnClickExitButton);
         }
 
         private void Start()
@@ -35,6 +38,12 @@ namespace BingsuTycoon.PlayScene
         {
             Time.timeScale = 1;
             SceneManager.LoadScene("PlayScene");
+        }
+
+        private void OnClickExitButton()
+        {
+            Time.timeScale = 1;
+            SceneManager.LoadScene("LobbyScene");
         }
     }
 }
