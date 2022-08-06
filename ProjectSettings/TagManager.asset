@@ -11,6 +11,8 @@ TagManager:
   - Customer
   - PausePanel
   - GameOverPanel
+  - BowlContainer
+  - IceMachine
   layers:
   - Default
   - TransparentFX
