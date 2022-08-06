@@ -4,85 +4,88 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Bowl : MonoBehaviour
+namespace BingsuTycoon.PlayScene
 {
-    private Vector3 startMousePos;
-    private Vector3 endMousePos;
-    private Vector3 originPos;
-    private Vector3 originLocalPos;
-    private Vector3 targetLocalPos;
-    private Coroutine moveCoroutine;
-    private bool canMakeIce = false;
-
-
-    private void OnMouseDown()
+    public class Bowl : MonoBehaviour
     {
-        if (!EventSystem.current.IsPointerOverGameObject())
-        {
-            startMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            originPos = transform.position;
-            originLocalPos = transform.localPosition;
-            targetLocalPos = originLocalPos;
+        private Vector3 startMousePos;
+        private Vector3 endMousePos;
+        private Vector3 originPos;
+        private Vector3 originLocalPos;
+        private Vector3 targetLocalPos;
+        private Coroutine moveCoroutine;
+        private bool canMakeIce = false;
 
-            if (moveCoroutine != null)
+
+        private void OnMouseDown()
+        {
+            if (!EventSystem.current.IsPointerOverGameObject())
             {
-                StopCoroutine(moveCoroutine);
+                startMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                originPos = transform.position;
+                originLocalPos = transform.localPosition;
+                targetLocalPos = originLocalPos;
+
+                if (moveCoroutine != null)
+                {
+                    StopCoroutine(moveCoroutine);
+                }
             }
         }
-    }
 
-    private void OnMouseUp()
-    {
-        if (!EventSystem.current.IsPointerOverGameObject())
+        private void OnMouseUp()
         {
-            endMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            if (startMousePos == endMousePos)
+            if (!EventSystem.current.IsPointerOverGameObject())
             {
-                Debug.Log("TOUCH");
+                endMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                if (startMousePos == endMousePos)
+                {
+                    Debug.Log("TOUCH");
+                }
+                else
+                {
+                    moveCoroutine = StartCoroutine(MoveCoroutine());
+                }
             }
-            else
+        }
+
+        private IEnumerator MoveCoroutine()
+        {
+            Vector3 startLocalPos = transform.localPosition;
+            float value = 0f;
+
+            while (value < 1f)
             {
-                moveCoroutine = StartCoroutine(MoveCoroutine());
+                float x = EasingFunction.EaseOutQuint(startLocalPos.x, targetLocalPos.x, value);
+                float y = EasingFunction.EaseOutQuint(startLocalPos.y, targetLocalPos.y, value);
+                transform.localPosition = new Vector3(x, y, transform.localPosition.z);
+                value += Time.deltaTime;
+                yield return null;
             }
         }
-    }
 
-    private IEnumerator MoveCoroutine()
-    {
-        Vector3 startLocalPos = transform.localPosition;
-        float value = 0f;
+        public void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.CompareTag("BowlContainer"))
+            {
+                targetLocalPos = collision.transform.position - (originPos - originLocalPos);
+            }
+            if (collision.CompareTag("IceMachine"))
+            {
+                canMakeIce = true;
+            }
+        }
 
-        while (value < 1f)
+        public void OnTriggerExit2D(Collider2D collision)
         {
-            float x = EasingFunction.EaseOutQuint(startLocalPos.x, targetLocalPos.x, value);
-            float y = EasingFunction.EaseOutQuint(startLocalPos.y, targetLocalPos.y, value);
-            transform.localPosition = new Vector3(x, y, transform.localPosition.z);
-            value += Time.deltaTime;
-            yield return null;
-        }
-    }
-
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("BowlContainer"))
-        {
-            targetLocalPos = collision.transform.position - (originPos - originLocalPos);
-        }
-        if (collision.CompareTag("IceMachine"))
-        {
-            canMakeIce = true;
-        }
-    }
-
-    public void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("BowlContainer"))
-        {
-            targetLocalPos = originLocalPos;
-        }
-        if (collision.CompareTag("IceMachine"))
-        {
-            canMakeIce = false;
+            if (collision.CompareTag("BowlContainer"))
+            {
+                targetLocalPos = originLocalPos;
+            }
+            if (collision.CompareTag("IceMachine"))
+            {
+                canMakeIce = false;
+            }
         }
     }
 }

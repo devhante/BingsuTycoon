@@ -4,34 +4,37 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class PausePanel : MonoBehaviour
+namespace BingsuTycoon.PlayScene
 {
-    private Button resumeButtonComponent;
-    private Button restartButtonComponent;
-
-    private void Awake()
+    public class PausePanel : MonoBehaviour
     {
-        resumeButtonComponent = transform.Find("ResumeButton").GetComponent<Button>();
-        restartButtonComponent = transform.Find("RestartButton").GetComponent<Button>();
+        private Button resumeButtonComponent;
+        private Button restartButtonComponent;
 
-        resumeButtonComponent.onClick.AddListener(OnClickResumeButton);
-        restartButtonComponent.onClick.AddListener(OnClickRestartButton);
-    }
+        private void Awake()
+        {
+            resumeButtonComponent = transform.Find("ResumeButton").GetComponent<Button>();
+            restartButtonComponent = transform.Find("RestartButton").GetComponent<Button>();
 
-    private void Start()
-    {
-        gameObject.SetActive(false);
-    }
+            resumeButtonComponent.onClick.AddListener(OnClickResumeButton);
+            restartButtonComponent.onClick.AddListener(OnClickRestartButton);
+        }
 
-    private void OnClickResumeButton()
-    {
-        Time.timeScale = 1;
-        gameObject.SetActive(false);
-    }
+        private void Start()
+        {
+            gameObject.SetActive(false);
+        }
 
-    private void OnClickRestartButton()
-    {
-        Time.timeScale = 1;
-        SceneManager.LoadScene("PlayScene");
+        private void OnClickResumeButton()
+        {
+            Time.timeScale = 1;
+            gameObject.SetActive(false);
+        }
+
+        private void OnClickRestartButton()
+        {
+            Time.timeScale = 1;
+            SceneManager.LoadScene("PlayScene");
+        }
     }
 }

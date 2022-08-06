@@ -3,22 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PauseButton : MonoBehaviour
+namespace BingsuTycoon.PlayScene
 {
-    private Button buttonComponent;
-    private GameObject pausePanel;
-
-    private void Awake()
+    public class PauseButton : MonoBehaviour
     {
-        buttonComponent = GetComponent<Button>();
-        buttonComponent.onClick.AddListener(OnClick);
+        private Button buttonComponent;
+        private GameObject pausePanel;
 
-        pausePanel = GameObject.FindGameObjectWithTag("PausePanel");
-    }
+        private void Awake()
+        {
+            buttonComponent = GetComponent<Button>();
+            buttonComponent.onClick.AddListener(OnClick);
 
-    private void OnClick()
-    {
-        Time.timeScale = 0;
-        pausePanel.SetActive(true);
+            pausePanel = GameObject.FindGameObjectWithTag("PausePanel");
+        }
+
+        private void OnClick()
+        {
+            Time.timeScale = 0;
+            pausePanel.SetActive(true);
+        }
     }
 }

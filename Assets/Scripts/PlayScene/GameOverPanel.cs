@@ -6,56 +6,59 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-public class GameOverPanel : MonoBehaviour
+namespace BingsuTycoon.PlayScene
 {
-    private GameObject result;
-    private TMP_Text gameOverTextComponent;
-    private TMP_Text bingsuCountTextComponent;
-    private Button submitButtonComponent;
-    private Button restartButtonComponent;
-
-    private void Awake()
+    public class GameOverPanel : MonoBehaviour
     {
-        gameOverTextComponent = transform.Find("GameOverText").GetComponent<TMP_Text>();
-        result = transform.Find("Result").gameObject;
+        private GameObject result;
+        private TMP_Text gameOverTextComponent;
+        private TMP_Text bingsuCountTextComponent;
+        private Button submitButtonComponent;
+        private Button restartButtonComponent;
 
-        bingsuCountTextComponent = result.transform.Find("BingsuCountText").GetComponent<TMP_Text>();
-        submitButtonComponent = result.transform.Find("SubmitButton").GetComponent<Button>();
-        restartButtonComponent = result.transform.Find("RestartButton").GetComponent<Button>();
+        private void Awake()
+        {
+            gameOverTextComponent = transform.Find("GameOverText").GetComponent<TMP_Text>();
+            result = transform.Find("Result").gameObject;
 
-        submitButtonComponent.onClick.AddListener(OnClickSubmitButton);
-        restartButtonComponent.onClick.AddListener(OnClickRestartButton);
-    }
+            bingsuCountTextComponent = result.transform.Find("BingsuCountText").GetComponent<TMP_Text>();
+            submitButtonComponent = result.transform.Find("SubmitButton").GetComponent<Button>();
+            restartButtonComponent = result.transform.Find("RestartButton").GetComponent<Button>();
 
-    private void Start()
-    {
-        gameObject.SetActive(false);
-    }
+            submitButtonComponent.onClick.AddListener(OnClickSubmitButton);
+            restartButtonComponent.onClick.AddListener(OnClickRestartButton);
+        }
 
-    public void PrintResult()
-    {
-        bingsuCountTextComponent.gameObject.SetActive(true);
-        result.SetActive(false);
-        StartCoroutine(PrintResultCoroutine());
-    }
+        private void Start()
+        {
+            gameObject.SetActive(false);
+        }
 
-    private IEnumerator PrintResultCoroutine()
-    {
-        yield return new WaitForSecondsRealtime(2f);
-        bingsuCountTextComponent.text = "판매한 빙수 개수 : " + GameManager.Instance.BingsuCount;
-        gameOverTextComponent.gameObject.SetActive(false);
-        result.SetActive(true);
-    }
+        public void PrintResult()
+        {
+            bingsuCountTextComponent.gameObject.SetActive(true);
+            result.SetActive(false);
+            StartCoroutine(PrintResultCoroutine());
+        }
 
-    private void OnClickSubmitButton()
-    {
-        Time.timeScale = 1;
-        SceneManager.LoadScene("PlayScene");
-    }
+        private IEnumerator PrintResultCoroutine()
+        {
+            yield return new WaitForSecondsRealtime(2f);
+            bingsuCountTextComponent.text = "판매한 빙수 개수 : " + GameManager.Instance.BingsuCount;
+            gameOverTextComponent.gameObject.SetActive(false);
+            result.SetActive(true);
+        }
 
-    private void OnClickRestartButton()
-    {
-        Time.timeScale = 1;
-        SceneManager.LoadScene("PlayScene");
+        private void OnClickSubmitButton()
+        {
+            Time.timeScale = 1;
+            SceneManager.LoadScene("PlayScene");
+        }
+
+        private void OnClickRestartButton()
+        {
+            Time.timeScale = 1;
+            SceneManager.LoadScene("PlayScene");
+        }
     }
 }

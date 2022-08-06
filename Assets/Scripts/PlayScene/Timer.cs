@@ -3,43 +3,46 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Timer : MonoBehaviour
+namespace BingsuTycoon.PlayScene
 {
-    private Slider sliderComponent;
-    private GameOverPanel gameOverPanel;
-
-    private float currentTime = 0f;
-    private float timeLimit = 120f;
-
-    private void Awake()
+    public class Timer : MonoBehaviour
     {
-        sliderComponent = GetComponent<Slider>();
-        gameOverPanel = GameObject.FindGameObjectWithTag("GameOverPanel").GetComponent<GameOverPanel>();
-    }
+        private Slider sliderComponent;
+        private GameOverPanel gameOverPanel;
 
-    private void Start()
-    {
-        StartTimer();
-    }
+        private float currentTime = 0f;
+        private float timeLimit = 120f;
 
-    public void StartTimer()
-    {
-        StartCoroutine(TimerCoroutine());
-    }
-
-    private IEnumerator TimerCoroutine()
-    {
-        currentTime = timeLimit;
-
-        while(currentTime > 0)
+        private void Awake()
         {
-            currentTime = Mathf.Max(currentTime - Time.smoothDeltaTime, 0f);
-            sliderComponent.value = currentTime / timeLimit;
-            yield return null;
+            sliderComponent = GetComponent<Slider>();
+            gameOverPanel = GameObject.FindGameObjectWithTag("GameOverPanel").GetComponent<GameOverPanel>();
         }
 
-        Time.timeScale = 0;
-        gameOverPanel.gameObject.SetActive(true);
-        gameOverPanel.PrintResult();
+        private void Start()
+        {
+            StartTimer();
+        }
+
+        public void StartTimer()
+        {
+            StartCoroutine(TimerCoroutine());
+        }
+
+        private IEnumerator TimerCoroutine()
+        {
+            currentTime = timeLimit;
+
+            while (currentTime > 0)
+            {
+                currentTime = Mathf.Max(currentTime - Time.smoothDeltaTime, 0f);
+                sliderComponent.value = currentTime / timeLimit;
+                yield return null;
+            }
+
+            Time.timeScale = 0;
+            gameOverPanel.gameObject.SetActive(true);
+            gameOverPanel.PrintResult();
+        }
     }
 }
