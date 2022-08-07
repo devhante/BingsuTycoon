@@ -10,29 +10,27 @@ namespace BingsuTycoon.PlayScene
     {
         private SpriteRenderer srComponent;
 
-        private Vector3 originPos;
+        private Vector3 appearPos;
+        private Vector3 disappearPos;
         private bool canGive;
         private Coroutine moveCoroutine;
 
         private void Awake()
         {
             srComponent = GetComponent<SpriteRenderer>();
-            originPos = transform.position;
+            appearPos = transform.position;
+            disappearPos = appearPos + new Vector3(0f, -10f, 0f);
             Disappear();
         }
 
         public void Appear()
         {
-            Color color = srComponent.color;
-            color.a = 1;
-            srComponent.color = color;
+            transform.position = appearPos;
         }
 
         public void Disappear()
         {
-            Color color = srComponent.color;
-            color.a = 0;
-            srComponent.color = color;
+            transform.position = disappearPos;
         }
 
         private void OnMouseDown()
@@ -55,7 +53,10 @@ namespace BingsuTycoon.PlayScene
                     Disappear();
                     GameObject.FindGameObjectWithTag("Customer").GetComponent<Customer>().Receive();
                 }
-                moveCoroutine = StartCoroutine(MoveOriginPosCoroutine());
+                else
+                {
+                    moveCoroutine = StartCoroutine(MoveOriginPosCoroutine());
+                }
             }
         }
 
@@ -66,8 +67,8 @@ namespace BingsuTycoon.PlayScene
 
             while (value < 1f)
             {
-                float x = EasingFunction.EaseOutQuint(startPos.x, originPos.x, value);
-                float y = EasingFunction.EaseOutQuint(startPos.y, originPos.y, value);
+                float x = EasingFunction.EaseOutQuint(startPos.x, appearPos.x, value);
+                float y = EasingFunction.EaseOutQuint(startPos.y, appearPos.y, value);
                 transform.position = new Vector3(x, y, transform.position.z);
                 value += Time.deltaTime;
                 yield return null;

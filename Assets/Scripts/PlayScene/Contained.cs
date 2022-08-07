@@ -31,42 +31,45 @@ namespace BingsuTycoon.PlayScene
 
         private void OnMouseUp() 
         {
-            if (draggableIngredient.CanUse)
+            if (!EventSystem.current.IsPointerOverGameObject())
             {
-                switch (ingredientType)
+                if (draggableIngredient.CanUse)
                 {
-                    case Ingredient.Milk:
-                        GameManager.Instance.CurrentIngredients.Milk = true;
-                        break;
-                    case Ingredient.RedBean:
-                        GameManager.Instance.CurrentIngredients.RedBean = true;
-                        break;
-                    case Ingredient.StrawberrySyrup:
-                        GameManager.Instance.CurrentIngredients.StrawberrySyrup = true;
-                        break;
-                    case Ingredient.ChocolateSyrup:
-                        GameManager.Instance.CurrentIngredients.ChocolateSyrup = true;
-                        break;
-                    case Ingredient.Strawberry:
-                        GameManager.Instance.CurrentIngredients.Strawberry = true;
-                        break;
-                    case Ingredient.Berry:
-                        GameManager.Instance.CurrentIngredients.Berry = true;
-                        break;
-                    case Ingredient.Pineapple:
-                        GameManager.Instance.CurrentIngredients.Pineapple = true;
-                        break;
-                    case Ingredient.Mango:
-                        GameManager.Instance.CurrentIngredients.Mango = true;
-                        break;
-                    case Ingredient.CheeseCube:
-                        GameManager.Instance.CurrentIngredients.CheeseCube = true;
-                        break;
-                    case Ingredient.IceCream:
-                        GameManager.Instance.CurrentIngredients.IceCream = true;
-                        break;
-                    default:
-                        break;
+                    switch (ingredientType)
+                    {
+                        case Ingredient.Milk:
+                            GameManager.Instance.CurrentIngredients.Milk = true;
+                            break;
+                        case Ingredient.RedBean:
+                            GameManager.Instance.CurrentIngredients.RedBean = true;
+                            break;
+                        case Ingredient.StrawberrySyrup:
+                            GameManager.Instance.CurrentIngredients.StrawberrySyrup = true;
+                            break;
+                        case Ingredient.ChocolateSyrup:
+                            GameManager.Instance.CurrentIngredients.ChocolateSyrup = true;
+                            break;
+                        case Ingredient.Strawberry:
+                            GameManager.Instance.CurrentIngredients.Strawberry = true;
+                            break;
+                        case Ingredient.Berry:
+                            GameManager.Instance.CurrentIngredients.Berry = true;
+                            break;
+                        case Ingredient.Pineapple:
+                            GameManager.Instance.CurrentIngredients.Pineapple = true;
+                            break;
+                        case Ingredient.Mango:
+                            GameManager.Instance.CurrentIngredients.Mango = true;
+                            break;
+                        case Ingredient.CheeseCube:
+                            GameManager.Instance.CurrentIngredients.CheeseCube = true;
+                            break;
+                        case Ingredient.IceCream:
+                            GameManager.Instance.CurrentIngredients.IceCream = true;
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
 

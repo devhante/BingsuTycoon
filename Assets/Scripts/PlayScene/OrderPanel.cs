@@ -21,7 +21,7 @@ namespace BingsuTycoon.PlayScene
             StringBuilder result = new StringBuilder();
             foreach (string item in GameManager.Instance.RevealedOrderList)
             {
-                result.Append(item + "\n");
+                result.Append(item + "\n\n");
             }
 
             textComponent.text = result.ToString();

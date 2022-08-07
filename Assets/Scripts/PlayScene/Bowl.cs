@@ -8,6 +8,7 @@ namespace BingsuTycoon.PlayScene
 {
     public class Bowl : MonoBehaviour
     {
+        private Vector3 initPos;
         private Vector3 startMousePos;
         private Vector3 endMousePos;
         private Vector3 originPos;
@@ -19,6 +20,7 @@ namespace BingsuTycoon.PlayScene
 
         private void Awake()
         {
+            initPos = transform.position;
             makeBingsuPanel = GameObject.FindGameObjectWithTag("MakeIcePanel");
         }
 
@@ -29,6 +31,11 @@ namespace BingsuTycoon.PlayScene
             originLocalPos = transform.localPosition;
             targetLocalPos = GameObject.FindGameObjectWithTag("IceMachine").transform.position - (originPos - originLocalPos); ;
             moveCoroutine = StartCoroutine(MoveCoroutine());
+        }
+
+        public void DestoyBowl()
+        {
+            transform.position = initPos;
         }
 
         private void OnMouseDown()

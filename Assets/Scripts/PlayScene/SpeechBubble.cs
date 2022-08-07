@@ -62,12 +62,12 @@ namespace BingsuTycoon.PlayScene
             this.contents = contents;
             contentIndex = 0;
 
-            GameManager.Instance.RevealedOrderList.Add(contents[contentIndex]);
             printCoroutine = StartCoroutine(PrintCoroutine());
         }
 
         public IEnumerator PrintCoroutine()
         {
+            GameManager.Instance.RevealedOrderList.Add(contents[contentIndex]);
             StringBuilder currentContent = new StringBuilder("");
             textComponent.text = currentContent.ToString();
 

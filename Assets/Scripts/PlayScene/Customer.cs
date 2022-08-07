@@ -14,7 +14,7 @@ namespace BingsuTycoon.PlayScene
         private SpriteRenderer srComponent;
         private SpeechBubble speechBubble;
 
-        private float appearTime = 1.5f;
+        private float appearTime = 1f;
 
         private void Awake()
         {
@@ -61,10 +61,10 @@ namespace BingsuTycoon.PlayScene
 
         public void Receive()
         {
-            GameManager.Instance.BingsuCount++;
-
             int wrongNumber = GameManager.Instance.CurrentOrder.OrderRecipe.GetWrongNumber(GameManager.Instance.CurrentIngredients);
             int score = Mathf.Max(100 - (wrongNumber * 20), 0);
+            GameManager.Instance.Score += score;
+            GameManager.Instance.BingsuCount++;
 
             speechBubble.gameObject.SetActive(true);
             speechBubble.Print(SpeechBubble.SpeechType.Receive, new string[] {
@@ -74,6 +74,8 @@ namespace BingsuTycoon.PlayScene
 
         public void Disappear()
         {
+            GameObject.FindGameObjectWithTag("Bowl").GetComponent<Bowl>().DestoyBowl();
+            GameManager.Instance.CurrentIngredients = new Ingredients();
             GameManager.Instance.RevealedOrderList = new List<string>();
             StartCoroutine(DisappearCoroutine());
         }

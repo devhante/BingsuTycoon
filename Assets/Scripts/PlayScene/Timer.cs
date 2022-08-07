@@ -11,7 +11,7 @@ namespace BingsuTycoon.PlayScene
         private GameOverPanel gameOverPanel;
 
         private float currentTime = 0f;
-        private float timeLimit = 120f;
+        private float timeLimit = 30f;
 
         private void Awake()
         {
