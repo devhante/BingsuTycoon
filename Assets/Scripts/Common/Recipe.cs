@@ -34,6 +34,8 @@ namespace BingsuTycoon.Common
         {
             int result = 0;
 
+            if (ingredients.IceCount <= 0) return 5;
+
             if (IceCount != ingredients.IceCount) result++;
 
             foreach (var item in Included)

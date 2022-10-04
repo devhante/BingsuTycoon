@@ -11,7 +11,13 @@ namespace BingsuTycoon.PlayScene
 
         public CustomerType customerType;
 
+        public Sprite defaultSprite;
+        public Sprite greatSprite;
+        public Sprite goodSprite;
+        public Sprite badSprite;
+
         private SpriteRenderer srComponent;
+        private AudioSource audioComponent;
         private SpeechBubble speechBubble;
 
         private float appearTime = 1f;
@@ -19,6 +25,7 @@ namespace BingsuTycoon.PlayScene
         private void Awake()
         {
             srComponent = transform.Find("Sprite").GetComponent<SpriteRenderer>();
+            audioComponent = GetComponent<AudioSource>();
             speechBubble = transform.Find("CustomerCanvas").Find("SpeechBubble").GetComponent<SpeechBubble>();
 
             gameObject.SetActive(false);
@@ -66,6 +73,13 @@ namespace BingsuTycoon.PlayScene
             GameManager.Instance.Score += score;
             GameManager.Instance.BingsuCount++;
 
+            GameManager.Instance.UpdateAchieve(customerType, score);
+            audioComponent.Play();
+
+            if (score >= 80) ChangeSpriteToGreat();
+            else if (score >= 40) ChangeSpriteToGood();
+            else ChangeSpriteToBad();
+
             speechBubble.gameObject.SetActive(true);
             speechBubble.Print(SpeechBubble.SpeechType.Receive, new string[] {
                 GameManager.Instance.GetRandomReceiveText(customerType, score)
@@ -74,7 +88,7 @@ namespace BingsuTycoon.PlayScene
 
         public void Disappear()
         {
-            GameObject.FindGameObjectWithTag("Bowl").GetComponent<Bowl>().DestoyBowl();
+            GameObject.FindGameObjectWithTag("Bowl").GetComponent<Bowl>().DestroyBowl();
             GameManager.Instance.CurrentIngredients = new Ingredients();
             GameManager.Instance.RevealedOrderList = new List<string>();
             StartCoroutine(DisappearCoroutine());
@@ -94,7 +108,28 @@ namespace BingsuTycoon.PlayScene
 
             yield return new WaitForSeconds(1f);
             GameObject.FindGameObjectWithTag("CustomerSpawner").GetComponent<CustomerSpawner>().SpawnRandomCustomer(1);
+            ChangeSpriteToDefault();
             gameObject.SetActive(false);
+        }
+
+        public void ChangeSpriteToDefault()
+        {
+            srComponent.sprite = defaultSprite;
+        }
+
+        public void ChangeSpriteToGreat()
+        {
+            srComponent.sprite = greatSprite;
+        }
+
+        public void ChangeSpriteToGood()
+        {
+            srComponent.sprite = goodSprite;
+        }
+
+        public void ChangeSpriteToBad()
+        {
+            srComponent.sprite = badSprite;
         }
     }
 }

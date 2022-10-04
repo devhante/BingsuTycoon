@@ -1,3 +1,4 @@
+using BingsuTycoon.Common;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,26 +8,16 @@ namespace BingsuTycoon.PlayScene.MakeIce
 {
     public class BingsuImage : MonoBehaviour
     {
-        public Sprite[] iceImageList;
-
-        private Image iceImageComponent;
+        private Animator animatorComponent;
 
         private void Awake()
         {
-            iceImageComponent = transform.Find("BowlSideIce").GetComponent<Image>();
+            animatorComponent = GetComponent<Animator>();
         }
 
-        private void Start()
+        private void Update()
         {
-            ChangeImage(0);
-        }
-
-        public void ChangeImage(int iceCount)
-        {
-            if (iceCount < iceImageList.Length)
-            {
-                iceImageComponent.sprite = iceImageList[iceCount];
-            }
+            animatorComponent.SetInteger("IceCount", GameManager.Instance.CurrentIngredients.IceCount);
         }
     }
 }

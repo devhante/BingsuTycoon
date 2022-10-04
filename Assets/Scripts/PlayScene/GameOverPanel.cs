@@ -16,7 +16,7 @@ namespace BingsuTycoon.PlayScene
 
         private GameObject resultPanel;
         private TMP_Text bingsuCountTextComponent;
-        private TMP_Text averageScoreTextComponent;
+        private TMP_Text scoreTextComponent;
         private Image rankImageComponent;
         private Button submitButtonComponent;
         private Button restartButtonComponent;
@@ -27,7 +27,7 @@ namespace BingsuTycoon.PlayScene
             resultPanel = transform.Find("ResultPanel").gameObject;
 
             bingsuCountTextComponent = resultPanel.transform.Find("BingsuCountText").GetComponent<TMP_Text>();
-            averageScoreTextComponent = resultPanel.transform.Find("AverageScoreText").GetComponent<TMP_Text>();
+            scoreTextComponent = resultPanel.transform.Find("ScoreText").GetComponent<TMP_Text>();
             rankImageComponent = resultPanel.transform.Find("RankImage").GetComponent<Image>();
             submitButtonComponent = resultPanel.transform.Find("SubmitButton").GetComponent<Button>();
             restartButtonComponent = resultPanel.transform.Find("RestartButton").GetComponent<Button>();
@@ -52,30 +52,26 @@ namespace BingsuTycoon.PlayScene
         {
             yield return new WaitForSecondsRealtime(2f);
 
-            float averageScore = 0;
-            if (GameManager.Instance.BingsuCount > 0)
-            {
-                averageScore = GameManager.Instance.Score / GameManager.Instance.BingsuCount;
-            }
-
-            bingsuCountTextComponent.text = "판매한 빙수 개수: " + GameManager.Instance.BingsuCount;
-            averageScoreTextComponent.text = "평균 만족도: " + averageScore + "%";
-            rankImageComponent.sprite = GetRankImage(averageScore);
+            bingsuCountTextComponent.text = "판매한 빙수: " + GameManager.Instance.BingsuCount;
+            scoreTextComponent.text = "점수: " + GameManager.Instance.Score;
+            rankImageComponent.sprite = GetRankImage();
             gameOverImageComponent.gameObject.SetActive(false);
             resultPanel.SetActive(true);
         }
 
-        private Sprite GetRankImage(float averageScore)
+        private Sprite GetRankImage()
         {
-            if (averageScore >= 100)
+            int score = GameManager.Instance.Score;
+
+            if (score >= 500)
                 return rankImages[0];
-            else if (averageScore >= 80)
+            else if (score >= 450)
                 return rankImages[1];
-            else if (averageScore >= 60)
+            else if (score >= 400)
                 return rankImages[2];
-            else if (averageScore >= 40)
+            else if (score >= 350)
                 return rankImages[3];
-            else if (averageScore >= 20)
+            else if (score >= 300)
                 return rankImages[4];
             else
                 return rankImages[5];

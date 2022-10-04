@@ -8,6 +8,8 @@ namespace BingsuTycoon.PlayScene
 {
     public class Bowl : MonoBehaviour
     {
+        private AudioSource audioComponent;
+
         private Vector3 initPos;
         private Vector3 startMousePos;
         private Vector3 endMousePos;
@@ -15,26 +17,35 @@ namespace BingsuTycoon.PlayScene
         private Vector3 originLocalPos;
         private Vector3 targetLocalPos;
         private Coroutine moveCoroutine;
+        private bool created = false;
         private bool canMakeIce = false;
+        private bool canDestroy = false;
         private GameObject makeBingsuPanel;
 
         private void Awake()
         {
+            audioComponent = GetComponent<AudioSource>();
+
             initPos = transform.position;
             makeBingsuPanel = GameObject.FindGameObjectWithTag("MakeIcePanel");
         }
 
         public void CreateBowlFromBowls(Vector3 startPos)
         {
-            transform.position = startPos;
-            originPos = transform.position;
-            originLocalPos = transform.localPosition;
-            targetLocalPos = GameObject.FindGameObjectWithTag("IceMachine").transform.position - (originPos - originLocalPos); ;
-            moveCoroutine = StartCoroutine(MoveCoroutine());
+            if (created == false)
+            {
+                created = true;
+                transform.position = startPos;
+                originPos = transform.position;
+                originLocalPos = transform.localPosition;
+                targetLocalPos = GameObject.FindGameObjectWithTag("IceMachine").transform.position - (originPos - originLocalPos); ;
+                moveCoroutine = StartCoroutine(MoveCoroutine());
+            }
         }
 
-        public void DestoyBowl()
+        public void DestroyBowl()
         {
+            created = false;
             transform.position = initPos;
         }
 
@@ -62,6 +73,12 @@ namespace BingsuTycoon.PlayScene
                 if (canMakeIce && Mathf.Abs((startMousePos - endMousePos).magnitude) <= 0.1f)
                 {
                     makeBingsuPanel.SetActive(true);
+                }
+                else if (canDestroy)
+                {
+                    GameManager.Instance.CurrentIngredients = new Ingredients();
+                    DestroyBowl();
+                    audioComponent.Play();
                 }
                 else
                 {
@@ -95,6 +112,10 @@ namespace BingsuTycoon.PlayScene
             {
                 canMakeIce = true;
             }
+            if (collision.CompareTag("TrashCan"))
+            {
+                canDestroy = true;
+            }
         }
 
         public void OnTriggerExit2D(Collider2D collision)
@@ -106,6 +127,10 @@ namespace BingsuTycoon.PlayScene
             if (collision.CompareTag("IceMachine"))
             {
                 canMakeIce = false;
+            }
+            if (collision.CompareTag("TrashCan"))
+            {
+                canDestroy = false;
             }
         }
     }

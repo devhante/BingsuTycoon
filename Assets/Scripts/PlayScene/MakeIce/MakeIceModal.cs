@@ -12,6 +12,9 @@ namespace BingsuTycoon.PlayScene.MakeIce
         private SuccessArea successArea;
         private Handle handle;
         private Button buttonComponent;
+        private AudioSource audioComponent;
+        private AudioSource succeededAudioComponent;
+        private AudioSource failedAudioComponent;
 
         private bool canClick = false;
 
@@ -23,6 +26,9 @@ namespace BingsuTycoon.PlayScene.MakeIce
 
             buttonComponent = GetComponent<Button>();
             buttonComponent.onClick.AddListener(OnClick);
+            audioComponent = GetComponent<AudioSource>();
+            succeededAudioComponent = transform.Find("SucceededAudio").GetComponent<AudioSource>();
+            failedAudioComponent = transform.Find("FailedAudio").GetComponent<AudioSource>();
         }
 
         private void OnEnable()
@@ -42,14 +48,18 @@ namespace BingsuTycoon.PlayScene.MakeIce
         {
             handle.StopMove();
             if (successArea.isSucceeded(handle.GetComponent<RectTransform>().anchoredPosition.y)) {
-                GameManager.Instance.CurrentIngredients.IceCount = Mathf.Min(GameManager.Instance.CurrentIngredients.IceCount + 1, 2);
+                if (GameManager.Instance.CurrentIngredients.IceCount < 2)
+                {
+                    GameManager.Instance.CurrentIngredients.IceCount++;
+                }
+                audioComponent.Play();
+                succeededAudioComponent.Play();
             }
             else
             {
                 GameManager.Instance.CurrentIngredients.IceCount = 0;
+                failedAudioComponent.Play();
             }
-
-            bingsuImage.ChangeImage(GameManager.Instance.CurrentIngredients.IceCount);
 
             StartCoroutine(StartMiniGameCoroutine(1f));
         }

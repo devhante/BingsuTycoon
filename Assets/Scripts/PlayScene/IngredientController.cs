@@ -15,6 +15,9 @@ namespace BingsuTycoon.PlayScene
         private GameObject lowToppingMango;
         private GameObject lowToppingCheese;
         private GameObject lowToppingMangoCheese;
+        private GameObject lowToppingPineapple;
+        private GameObject lowToppingBerry;
+        private GameObject lowToppingStrawberry;
         private GameObject lowToppingIceCream;
         private GameObject highIce;
         private GameObject highMilk;
@@ -24,6 +27,9 @@ namespace BingsuTycoon.PlayScene
         private GameObject highToppingMango;
         private GameObject highToppingCheese;
         private GameObject highToppingMangoCheese;
+        private GameObject highToppingPineapple;
+        private GameObject highToppingBerry;
+        private GameObject highToppingStrawberry;
         private GameObject highToppingIceCream;
 
         private void Awake()
@@ -36,16 +42,22 @@ namespace BingsuTycoon.PlayScene
             lowToppingMango = transform.GetChild(5).gameObject;
             lowToppingCheese = transform.GetChild(6).gameObject;
             lowToppingMangoCheese = transform.GetChild(7).gameObject;
-            lowToppingIceCream = transform.GetChild(8).gameObject;
-            highIce = transform.GetChild(9).gameObject;
-            highMilk = transform.GetChild(10).gameObject;
-            highSyrupChocolate = transform.GetChild(11).gameObject;
-            highSyrupStrawberry = transform.GetChild(12).gameObject;
-            highToppingRedBean = transform.GetChild(13).gameObject;
-            highToppingMango = transform.GetChild(14).gameObject;
-            highToppingCheese = transform.GetChild(15).gameObject;
-            highToppingMangoCheese = transform.GetChild(16).gameObject;
-            highToppingIceCream = transform.GetChild(17).gameObject;
+            lowToppingPineapple = transform.GetChild(8).gameObject;
+            lowToppingBerry = transform.GetChild(9).gameObject;
+            lowToppingStrawberry = transform.GetChild(10).gameObject;
+            lowToppingIceCream = transform.GetChild(11).gameObject;
+            highIce = transform.GetChild(12).gameObject;
+            highMilk = transform.GetChild(13).gameObject;
+            highSyrupChocolate = transform.GetChild(14).gameObject;
+            highSyrupStrawberry = transform.GetChild(15).gameObject;
+            highToppingRedBean = transform.GetChild(16).gameObject;
+            highToppingMango = transform.GetChild(17).gameObject;
+            highToppingCheese = transform.GetChild(18).gameObject;
+            highToppingMangoCheese = transform.GetChild(19).gameObject;
+            highToppingPineapple = transform.GetChild(20).gameObject;
+            highToppingBerry = transform.GetChild(21).gameObject;
+            highToppingStrawberry = transform.GetChild(22).gameObject;
+            highToppingIceCream = transform.GetChild(23).gameObject;
         }
 
         private void Update()
@@ -59,6 +71,9 @@ namespace BingsuTycoon.PlayScene
             lowToppingMango.SetActive(i.IceCount == 1 && i.Mango && !i.CheeseCube);
             lowToppingCheese.SetActive(i.IceCount == 1 && i.CheeseCube && !i.Mango);
             lowToppingMangoCheese.SetActive(i.IceCount == 1 && i.Mango && i.CheeseCube);
+            lowToppingPineapple.SetActive(i.IceCount == 1 && i.Pineapple);
+            lowToppingBerry.SetActive(i.IceCount == 1 && i.Berry);
+            lowToppingStrawberry.SetActive(i.IceCount == 1 && i.Strawberry);
             lowToppingIceCream.SetActive(i.IceCount == 1 && i.IceCream);
 
             highIce.SetActive(i.IceCount == 2);
@@ -69,6 +84,9 @@ namespace BingsuTycoon.PlayScene
             highToppingMango.SetActive(i.IceCount == 2 && i.Mango && !i.CheeseCube);
             highToppingCheese.SetActive(i.IceCount == 2 && i.CheeseCube && !i.Mango);
             highToppingMangoCheese.SetActive(i.IceCount == 2 && i.Mango && i.CheeseCube);
+            highToppingPineapple.SetActive(i.IceCount == 2 && i.Pineapple);
+            highToppingBerry.SetActive(i.IceCount == 2 && i.Berry);
+            highToppingStrawberry.SetActive(i.IceCount == 2 && i.Strawberry);
             highToppingIceCream.SetActive(i.IceCount == 2 && i.IceCream);
         }
     }

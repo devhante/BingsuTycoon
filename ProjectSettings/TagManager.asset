@@ -16,6 +16,13 @@ TagManager:
   - MakeIcePanel
   - Board
   - Bowl
+  - TrashCan
+  - ProfileCanvas
+  - AchieveCanvas
+  - HowToPlayCanvas
+  - TouchSound
+  - AchieveBar
+  - IngredientClickSound
   layers:
   - Default
   - TransparentFX

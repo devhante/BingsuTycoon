@@ -10,6 +10,8 @@ public class Syrup : MonoBehaviour
 
     public bool CanUse { get; set; } = false;
 
+    private SpriteRenderer srComponent;
+
     private Vector3 originLocalPos;
     private Coroutine moveCoroutine;
 
@@ -19,10 +21,19 @@ public class Syrup : MonoBehaviour
     private Vector3 draggingRotation = new Vector3(0f, 0f, 135f);
     private Vector3 draggingScale = new Vector3(-1, 1, 1);
 
+    private int orderInLayer = 101;
+    private int dragOrderInLayer = 120;
+
+    private void Awake()
+    {
+        srComponent = GetComponent<SpriteRenderer>();
+    }
+
     private void OnMouseDown()
     {
         if (!EventSystem.current.IsPointerOverGameObject())
         {
+            srComponent.sortingOrder = dragOrderInLayer;
             transform.rotation = Quaternion.Euler(draggingRotation);
             transform.localScale = draggingScale;
 
@@ -39,6 +50,7 @@ public class Syrup : MonoBehaviour
     {
         if (!EventSystem.current.IsPointerOverGameObject())
         {
+            srComponent.sortingOrder = orderInLayer;
             transform.rotation = Quaternion.Euler(originRotation);
             transform.localScale = originScale;
 

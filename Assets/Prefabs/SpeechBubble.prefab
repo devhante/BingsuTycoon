@@ -75,8 +75,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 3103373360908785060}
   - component: {fileID: 3103373360908785063}
   - component: {fileID: 3103373360908785062}
+  - component: {fileID: 5719530919263613067}
   m_Layer: 5
   m_Name: SubmitOrderButton
   m_TagString: Untagged
@@ -172,7 +173,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 460, y: -350}
+  m_AnchoredPosition: {x: 460, y: -300}
   m_SizeDelta: {x: 200, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3103373360908785060
@@ -257,6 +258,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5719530919263613067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3103373360908785048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34b521914f3a364449d42bf343100cf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3103373360919086051
 GameObject:
   m_ObjectHideFlags: 0
@@ -292,8 +305,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 50}
-  m_SizeDelta: {x: -80.00001, y: -140}
+  m_AnchoredPosition: {x: 19.7243, y: 60.3654}
+  m_SizeDelta: {x: -131.6545, y: -188.2125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3103373360919086062
 CanvasRenderer:
@@ -325,8 +338,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0bb9a010dcd08e7469b3dc8287bed502, type: 2}
-  m_sharedMaterial: {fileID: 5247880851233438177, guid: 0bb9a010dcd08e7469b3dc8287bed502, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d51988d761355c144afa8accb3006fad, type: 2}
+  m_sharedMaterial: {fileID: 5247880851233438177, guid: d51988d761355c144afa8accb3006fad, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -467,8 +480,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -539,6 +552,7 @@ GameObject:
   - component: {fileID: 3103373361966854832}
   - component: {fileID: 3103373361966854835}
   - component: {fileID: 3103373361966854834}
+  - component: {fileID: 7825229649249208971}
   m_Layer: 5
   m_Name: HintButton
   m_TagString: Untagged
@@ -564,7 +578,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 700, y: -350}
+  m_AnchoredPosition: {x: 700, y: -300}
   m_SizeDelta: {x: 200, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3103373361966854832
@@ -649,6 +663,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7825229649249208971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3103373361966854836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34b521914f3a364449d42bf343100cf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3103373362184935731
 GameObject:
   m_ObjectHideFlags: 0
@@ -662,6 +688,7 @@ GameObject:
   - component: {fileID: 3103373362184935729}
   - component: {fileID: 3103373362184935743}
   - component: {fileID: 3103373362184935740}
+  - component: {fileID: 5509309885509257362}
   m_Layer: 5
   m_Name: SpeechBubble
   m_TagString: SpeechBubble
@@ -721,7 +748,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c49ffbcfca231a140b30123e3da09437, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b6e374cafa4029941871a2a7ac5c1f6a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -787,6 +814,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5509309885509257362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3103373362184935731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34b521914f3a364449d42bf343100cf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6271056846794149668
 GameObject:
   m_ObjectHideFlags: 0
@@ -862,8 +901,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -934,6 +973,7 @@ GameObject:
   - component: {fileID: 5674175085442352629}
   - component: {fileID: 4315541966919165066}
   - component: {fileID: 7225269719871534999}
+  - component: {fileID: 5218618509512095244}
   m_Layer: 5
   m_Name: SubmitReceiveButton
   m_TagString: Untagged
@@ -959,7 +999,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 460, y: -350}
+  m_AnchoredPosition: {x: 460, y: -300}
   m_SizeDelta: {x: 200, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5674175085442352629
@@ -1044,3 +1084,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5218618509512095244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8910174681590869243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34b521914f3a364449d42bf343100cf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

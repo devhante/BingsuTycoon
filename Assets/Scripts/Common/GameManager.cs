@@ -88,7 +88,7 @@ namespace BingsuTycoon.Common
                         Ingredient.IceCream
                     }
                 ),
-                new string[] { "시원한 얼음을 맛있게 갈아준다는 이야기를 듣고 왔어요!\n절 만족시킬 만한 베리치즈빙수를 만들어 주세요." }
+                new string[] { "시원한 얼음을 맛있게 갈아준다는\n이야기를 듣고 왔어요!\n절 만족시킬 만한 베리치즈빙수를\n만들어 주세요." }
             )
         };
         private List<Order> catOrderList = new List<Order>() {
@@ -111,7 +111,7 @@ namespace BingsuTycoon.Common
                         Ingredient.IceCream
                     }
                 ),
-                new string[] { "알로하~ 트로피칼 스타일의 빙수 하나 Please!", "열대과일" }
+                new string[] { "알로하~\n트로피칼 스타일의 빙수 하나 Please!", "열대과일" }
             ),
             new Order(
                 new Recipe
@@ -180,7 +180,7 @@ namespace BingsuTycoon.Common
                         Ingredient.IceCream
                     }
                 ),
-                new string[] { "헉헉… 맛있는 빙수… 베리를 넣은 더블 사이즈로 많이 주세요.", "더블 사이즈" }
+                new string[] { "헉헉… 맛있는 빙수…\n베리를 넣은 더블 사이즈로 많이 주세요.", "더블 사이즈" }
             )
         };
         private List<Order> elfOrderList = new List<Order>() {
@@ -252,7 +252,7 @@ namespace BingsuTycoon.Common
                         Ingredient.IceCream
                     }
                 ),
-                new string[] { "팥… 팥색이 맘에 들어. 검붉은 색…\n난 어두운 색이 좋아. 어두운 색 달콤한 걸로 부탁해." }
+                new string[] { "팥… 팥색이 맘에 들어. 검붉은 색…\n난 어두운 색이 좋아.\n어두운 색 달콤한 걸로 부탁해." }
             )
         };
 
@@ -260,7 +260,7 @@ namespace BingsuTycoon.Common
         {
             "정말 맛있는 빙수에요. 고마워요!",
             "시원한 맛이 입안에 가득해요. 만족스러워요.",
-            "휴~ 살 것 같다. 지느러미 춤이 저절로 나와요!",
+            "휴~ 살 것 같다.\n지느러미 춤이 저절로 나와요!",
             "맛의 쓰나미! 해일이다~"
         };
         private string[] mermaidGoodText = new string[]
@@ -394,6 +394,74 @@ namespace BingsuTycoon.Common
             }
 
             return resultArray[Random.Range(0, resultArray.Length)];
+        }
+
+        private int rankACount = 0;
+        private int mermaidSCount = 0;
+        private int catSCount = 0;
+        private int elfSCuont = 0;
+        private int rankDFCount = 0;
+
+        public void UpdateAchieve(Customer.CustomerType customerType, int score)
+        {
+            if (score >= 80)
+            {
+                rankACount++;
+            }
+            if (customerType == Customer.CustomerType.Mermaid && score >= 100)
+            {
+                mermaidSCount++;
+            }
+            if (customerType == Customer.CustomerType.Cat && score >= 100)
+            {
+                catSCount++;
+            }
+            if (customerType == Customer.CustomerType.Elf && score >= 100)
+            {
+                elfSCuont++;
+            }
+            if (score <= 20)
+            {
+                rankDFCount++;
+            }
+
+            if (rankACount >= 5 && AchieveManager.Instance.AchieveData[0] == false)
+            {
+                AchieveManager.Instance.Achieve(0);
+            }
+            if (rankACount >= 7 && AchieveManager.Instance.AchieveData[1] == false)
+            {
+                AchieveManager.Instance.Achieve(1);
+            }
+            if (rankACount >= 8 && AchieveManager.Instance.AchieveData[2] == false)
+            {
+                AchieveManager.Instance.Achieve(2);
+            }
+            if (rankACount >= 10 && AchieveManager.Instance.AchieveData[3] == false)
+            {
+                AchieveManager.Instance.Achieve(3);
+            }
+            if (BingsuCount >= 10 && AchieveManager.Instance.AchieveData[4] == false)
+            {
+                AchieveManager.Instance.Achieve(4);
+            }
+            if (mermaidSCount >= 3 && AchieveManager.Instance.AchieveData[5] == false)
+            {
+                AchieveManager.Instance.Achieve(5);
+            }
+            if (elfSCuont >= 3 && AchieveManager.Instance.AchieveData[7] == false)
+            {
+                AchieveManager.Instance.Achieve(7);
+            }
+            if (catSCount >= 3 && AchieveManager.Instance.AchieveData[6] == false)
+            {
+                AchieveManager.Instance.Achieve(6);
+            }
+        }
+
+        public bool isRankAllDF()
+        {
+            return rankDFCount == BingsuCount;
         }
     }
 
