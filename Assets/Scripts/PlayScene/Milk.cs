@@ -19,7 +19,7 @@ public class Milk : MonoBehaviour
     private Vector3 draggingRotation = new Vector3(0f, 180f, -135f);
     private Vector3 draggingScale = new Vector3(-1, 1, 1);
 
-    private int orderInLayer = 101;
+    private int orderInLayer = 102;
     private int dragOrderInLayer = 120;
 
     private void Awake()

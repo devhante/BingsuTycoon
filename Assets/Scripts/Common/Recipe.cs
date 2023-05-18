@@ -35,6 +35,13 @@ namespace BingsuTycoon.Common
             int result = 0;
 
             if (ingredients.IceCount <= 0) return 5;
+            if (NeedSyrup)
+            {
+                bool hasSyrup = ingredients.GetIngredient(Ingredient.StrawberrySyrup)
+                    || ingredients.GetIngredient(Ingredient.ChocolateSyrup)
+                    || ingredients.GetIngredient(Ingredient.Milk);
+                if (hasSyrup == false) result++;
+            }
 
             if (IceCount != ingredients.IceCount) result++;
 
